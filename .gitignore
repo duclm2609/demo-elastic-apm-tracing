@@ -113,3 +113,7 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
+micro-api-gateway/micro-api-gateway
+micro-price-service/micro-price-service
+micro-review-service/micro-review-service
