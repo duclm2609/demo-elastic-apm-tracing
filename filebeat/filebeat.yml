@@ -1,0 +1,27 @@
+# List of inputs to fetch data.
+filebeat.config.inputs:
+  enabled: true
+  path: /usr/share/filebeat/inputs.d/*.yml
+  reload.enabled: true
+  reload.period: 10s
+
+#----------------------------- Logstash output ---------------------------------
+output.logstash:
+  # Boolean flag to enable or disable the output module.
+  enabled: true
+
+  # The Logstash hosts
+  hosts: ["logstash:5044"]
+
+  # Set gzip compression level.
+  compression_level: 3
+
+
+#============================== X-Pack Monitoring ===============================
+# Filebeat can export internal metrics to a central Elasticsearch monitoring
+# cluster.  This requires xpack monitoring to be enabled in Elasticsearch.  The
+# reporting is disabled by default.
+
+# Set to true to enable the monitoring reporter.
+# collect monitoring metrics using metricbeat, so we disable the default collection of Filebeat monitoring metrics.
+monitoring.enabled: false

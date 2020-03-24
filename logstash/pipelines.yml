@@ -1,0 +1,3 @@
+- pipeline.id: beats-input
+  path.config: "/usr/share/logstash/config/pipeline/01-beats-input.conf"
+  pipeline.workers: 1
