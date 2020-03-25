@@ -1,5 +1,5 @@
 
-# Demo Elastic APM in microservice  
+# Demo Elastic APM tracing in microservice  
   
 This is a fake Products system which is used to demonstrate using Elastic APM tracing (**APM tracing + log correlation**) in microservice system.  
   
@@ -35,17 +35,18 @@ config := nplog.NpLoggerOption{
   FileMaxAge:     1,  
   FileCompress:   true,  
   FileLevel:      nplog.Info,  
-}  
+}
+// Create new logger instance, using zap
 logger, err := nplog.NewNpLogger(nplog.ZapLogger, config)
 
 // Pass context for log correlation
 logger.For(ctx).Infof("getting product detail information")
 ```
-**Notes**: avoid package level logging, as stated [here]([https://dave.cheney.net/2017/01/23/the-package-level-logger-anti-pattern](https://dave.cheney.net/2017/01/23/the-package-level-logger-anti-pattern)).
+**Notes**: avoid package level logging, as stated [here](https://dave.cheney.net/2017/01/23/the-package-level-logger-anti-pattern).
 
  - Propagate trace context to other service via HTTTP request
- 
-Use helper package [ctxhttp]([https://pkg.go.dev/golang.org/x/net/context/ctxhttp?tab=doc](https://pkg.go.dev/golang.org/x/net/context/ctxhttp?tab=doc)):
+
+Use helper package [ctxhttp](https://pkg.go.dev/golang.org/x/net/context/ctxhttp?tab=doc):
  ``` go
  ctxhttp.Get(ctx, i.httpClient, "http://micro-inventory:8080/"+productId)
  ```
