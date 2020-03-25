@@ -42,7 +42,7 @@ logger, err := nplog.NewNpLogger(nplog.ZapLogger, config)
 // Pass context for log correlation
 logger.For(ctx).Infof("getting product detail information")
 ```
-**Notes**: avoid package level logging, as stated [here](https://dave.cheney.net/2017/01/23/the-package-level-logger-anti-pattern).
+**Notes**: avoid package level logger instance, as stated [here](https://dave.cheney.net/2017/01/23/the-package-level-logger-anti-pattern).
 
  - Propagate trace context to other service via HTTTP request
 

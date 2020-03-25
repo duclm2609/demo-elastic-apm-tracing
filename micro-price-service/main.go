@@ -32,7 +32,7 @@ func main() {
 		log.Fatal("failed to initialize logger, exit")
 	}
 	// Add specific service field
-	logger = logger.With(nplog.Fields{"service": "micro-api-gateway"})
+	logger = logger.With(nplog.Fields{"service": "micro-price"})
 
 	e := echo.New()
 	e.Use(apmechov4.Middleware())

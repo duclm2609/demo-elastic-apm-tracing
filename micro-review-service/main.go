@@ -23,7 +23,7 @@ func main() {
 		EnableConsole:  true,
 		EnableFile:     true,
 		FileJSONFormat: true,
-		Filename:       "/var/logs/micro-api-gateway.log",
+		Filename:       "/var/logs/micro-review.log",
 		FileMaxSize:    512,
 		FileMaxBackups: 1,
 		FileMaxAge:     1,
@@ -35,7 +35,7 @@ func main() {
 		log.Fatal("failed to initialize logger, exit")
 	}
 	// Add specific service field
-	logger = logger.With(nplog.Fields{"service": "micro-api-gateway"})
+	logger = logger.With(nplog.Fields{"service": "micro-review"})
 
 	e := echo.New()
 	e.Use(apmechov4.Middleware())

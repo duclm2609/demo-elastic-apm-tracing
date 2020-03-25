@@ -1,0 +1,12 @@
+# Default Kibana configuration from kibana-docker.
+server.name: local
+server.host: "0"
+
+
+# The URLs of the Elasticsearch instances to use for all queries.
+# All nodes listed here must be on the same cluster.
+elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+elasticsearch.username: elastic
+elasticsearch.password: 123456Aa@
+
+xpack.monitoring.ui.container.elasticsearch.enabled: true

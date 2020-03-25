@@ -42,6 +42,41 @@ services:
     ports:
       - "8710:8080"
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
+    container_name: elasticsearch
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - ELASTIC_PASSWORD=123456Aa@
+    networks:
+      - micro-demo
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+      - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    healthcheck:
+      test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  apm-server:
+    image: docker.elastic.co/apm/apm-server:7.5.0
+    container_name: apm-server
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+    depends_on: ["elasticsearch"]
+    networks:
+      - micro-demo
+    command: --strict.perms=false -e # -e flag to log to stderr and disable syslog/file output
+    volumes:
+      - ./apm-server/apm-server.yml:/usr/share/apm-server/apm-server.yml
+    healthcheck:
+      test: curl -s http://localhost:8200/healthcheck >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   filebeat:
     image: docker.elastic.co/beats/filebeat:7.5.0
     container_name: filebeat
@@ -57,23 +92,54 @@ services:
       - micro-review-log:/var/logs/micro-review
     networks:
       - micro-demo
+    healthcheck:
+      test: filebeat test config
+      interval: 30s
+      timeout: 15s
+      retries: 5
 
   logstash:
     image: docker.elastic.co/logstash/logstash:7.5.0
     container_name: logstash
     environment:
       - TZ=Asia/Ho_Chi_Minh
+    depends_on: ["elasticsearch"]
     volumes:
       - ./logstash/pipeline:/usr/share/logstash/config/pipeline
       - ./logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml
       - ./logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
     networks:
       - micro-demo
+    healthcheck:
+      test: bin/logstash -t
+      interval: 30s
+      timeout: 50s
+      retries: 5
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.5.0
+    container_name: kibana
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+    depends_on: ["elasticsearch"]
+    volumes:
+      - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - "5601:5601"
+    networks:
+      - micro-demo
+    healthcheck:
+      test: curl -s http://localhost:5601 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
 
 networks:
   micro-demo:
 
 volumes:
+  esdata:
   micro-inventory-log:
   micro-api-gateway-log:
   micro-price-log:

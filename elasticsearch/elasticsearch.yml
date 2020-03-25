@@ -1,0 +1,14 @@
+#A node can only join a cluster when it shares its cluster.name with all the other nodes in the cluster.
+# Make sure that you don’t reuse the same cluster names in different environments,
+# otherwise you might end up with nodes joining the wrong cluster.
+cluster.name: local
+# In order to form a cluster with nodes on other servers
+network.host: 0.0.0.0
+# transport.host: 0.0.0.0
+
+discovery.type: single-node
+xpack.security.enabled: true
+
+# Configure monitoring data of elastic stack
+xpack.monitoring.collection.enabled: true
+xpack.monitoring.collection.interval: 60s

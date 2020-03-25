@@ -1,0 +1,14 @@
+apm-server:
+  host: "0.0.0.0:8200"
+  kibana:
+    enabled: true # Must be true to use APM Agent configuration
+    host: "kibana:5601"
+    username: "elastic"
+    password: "123456Aa@"
+    protocol: "http"
+
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  protocol: "http"
+  username: elastic
+  password: "123456Aa@"
