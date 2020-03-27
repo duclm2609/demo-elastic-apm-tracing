@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="Quarkus" url="file://$PROJECT_DIR$/micro-agency" />
+    <file type="web" url="file://$PROJECT_DIR$/micro-partner-gateway" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/micro-inventory-service/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-agency/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-partner-gateway/pom.xml" />
       </list>
     </option>
   </component>
