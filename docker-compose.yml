@@ -4,7 +4,14 @@ services:
   micro-inventory:
     build:
       context: ./micro-inventory-service
+      args:
+        APM_VERSION: ${APM_AGENT_VER}
     container_name: micro-inventory
+    environment:
+      ELASTIC_APM_ENVIRONMENT: local
+      ELASTIC_APM_SERVER_URL: http://apm-server:8200
+      ELASTIC_APM_SERVICE_NAME: micro-inventory
+      ELASTIC_APM_APPLICATION_PACKAGES: vn.duclm.demo.microinventoryservice
     volumes:
       - micro-inventory-log:/app/micro-inventory-service/logs
     networks:
@@ -43,7 +50,7 @@ services:
       - "8710:8080"
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_STACK_VER}
     container_name: elasticsearch
     environment:
       - TZ=Asia/Ho_Chi_Minh
@@ -61,7 +68,7 @@ services:
       start_period: 20s
 
   apm-server:
-    image: docker.elastic.co/apm/apm-server:7.5.0
+    image: docker.elastic.co/apm/apm-server:${ELASTIC_STACK_VER}
     container_name: apm-server
     environment:
       - TZ=Asia/Ho_Chi_Minh
@@ -78,7 +85,7 @@ services:
       retries: 5
 
   filebeat:
-    image: docker.elastic.co/beats/filebeat:7.5.0
+    image: docker.elastic.co/beats/filebeat:${ELASTIC_STACK_VER}
     container_name: filebeat
     environment:
       - TZ=Asia/Ho_Chi_Minh
@@ -99,7 +106,7 @@ services:
       retries: 5
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.5.0
+    image: docker.elastic.co/logstash/logstash:${ELASTIC_STACK_VER}
     container_name: logstash
     environment:
       - TZ=Asia/Ho_Chi_Minh
@@ -117,7 +124,7 @@ services:
       retries: 5
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.5.0
+    image: docker.elastic.co/kibana/kibana:${ELASTIC_STACK_VER}
     container_name: kibana
     environment:
       - TZ=Asia/Ho_Chi_Minh
