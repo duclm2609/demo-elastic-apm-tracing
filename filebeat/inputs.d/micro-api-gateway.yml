@@ -1,8 +1,0 @@
-- type: log
-  paths:
-    - /var/logs/micro-api-gateway/*.log
-  fields:
-    log_type: demo-micro-api-gateway
-  scan_frequency: 3s
-  encoding: utf-8
-  json.keys_under_root: true

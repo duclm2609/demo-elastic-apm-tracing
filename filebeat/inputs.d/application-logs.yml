@@ -1,0 +1,10 @@
+- type: log
+  paths:
+    - /var/logs/*/*.log
+  encoding: utf-8
+  scan_frequency: 1s
+  json:
+    keys_under_root: true
+    add_error_key: true
+    overwrite_keys: true
+    expand_keys: true
