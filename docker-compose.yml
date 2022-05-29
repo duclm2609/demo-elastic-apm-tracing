@@ -13,7 +13,7 @@ services:
       ELASTIC_APM_SERVICE_NAME: micro-inventory
       ELASTIC_APM_APPLICATION_PACKAGES: vn.duclm.demo.microinventoryservice
     volumes:
-      - micro-inventory-log:/app/micro-inventory-service/logs
+      - micro-inventory-log:/application/micro-inventory-service/logs
     networks:
       - micro-demo
 
