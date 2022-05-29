@@ -25,6 +25,11 @@ public class InventoryService {
             e.printStackTrace();
         }
 
+        final int productId = Integer.parseInt(id);
+        if (productId > 3) {
+            throw new RuntimeException("Invalid production ID");
+        }
+
         // Call price service
         log.info("getting product price from Price service");
         PriceRes price = restTemplate.getForObject("http://micro-price:8080/price/{id}", PriceRes.class, id);
