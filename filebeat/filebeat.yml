@@ -17,7 +17,7 @@ filebeat.config.inputs:
 #  compression_level: 3
 output.kafka:
   # initial brokers for reading cluster metadata
-  hosts: [ "kafka-broker:9092" ]
+  hosts: [ "kafka-broker:29092" ]
 
   # message topic selection + partitioning
   topic: 'tcbs-logs'
@@ -37,3 +37,4 @@ output.kafka:
 # Set to true to enable the monitoring reporter.
 # collect monitoring metrics using metricbeat, so we disable the default collection of Filebeat monitoring metrics.
 monitoring.enabled: false
+logging.metrics.enabled: false
