@@ -19,7 +19,7 @@ type Review struct {
 
 func main() {
 	// Setup logger
-	config := nplog.NpLoggerOption{
+	config := nplog.Options{
 		EnableConsole:  true,
 		EnableFile:     true,
 		FileJSONFormat: true,
@@ -30,12 +30,12 @@ func main() {
 		FileCompress:   true,
 		FileLevel:      nplog.Info,
 	}
-	logger, err := nplog.NewNpLogger(nplog.ZapLogger, config)
+	logger, err := nplog.New(nplog.ZapLogger, config)
 	if err != nil {
 		log.Fatal("failed to initialize logger, exit")
 	}
 	// Add specific service field
-	logger = logger.With(nplog.Fields{"service": "micro-review"})
+	logger = logger.With(nplog.Fields{"service.name": "micro-review"})
 
 	e := echo.New()
 	e.Use(apmechov4.Middleware())

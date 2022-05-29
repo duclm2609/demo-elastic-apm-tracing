@@ -8,9 +8,7 @@
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <findAndRegisterJacksonModules>false</findAndRegisterJacksonModules>
             <providers>
-                <timestamp>
-                    <fieldName>timestamp</fieldName>
-                </timestamp>
+                <timestamp/>
                 <logLevel/>
                 <threadName/>
                 <loggerName/>
@@ -66,8 +64,7 @@
                     <!-- the pattern that defines what to include -->
                     <pattern>
                         {
-                        "timestamp": "%date{ISO8601}",
-                        "service": "micro-inventory"
+                        "service.name": "micro-inventory"
                         }
                     </pattern>
                 </pattern>

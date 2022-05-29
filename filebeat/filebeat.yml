@@ -6,15 +6,27 @@ filebeat.config.inputs:
   reload.period: 10s
 
 #----------------------------- Logstash output ---------------------------------
-output.logstash:
-  # Boolean flag to enable or disable the output module.
-  enabled: true
+#output.logstash:
+#  # Boolean flag to enable or disable the output module.
+#  enabled: true
+#
+#  # The Logstash hosts
+#  hosts: ["logstash:5044"]
+#
+#  # Set gzip compression level.
+#  compression_level: 3
+output.kafka:
+  # initial brokers for reading cluster metadata
+  hosts: [ "kafka-broker:9092" ]
 
-  # The Logstash hosts
-  hosts: ["logstash:5044"]
+  # message topic selection + partitioning
+  topic: 'tcbs-logs'
+  partition.round_robin:
+    reachable_only: false
 
-  # Set gzip compression level.
-  compression_level: 3
+  required_acks: 1
+  compression: gzip
+  max_message_bytes: 1000000
 
 
 #============================== X-Pack Monitoring ===============================

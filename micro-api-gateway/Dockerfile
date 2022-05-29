@@ -1,11 +1,9 @@
 FROM golang as builder
 ENV GO111MODULE=on
 WORKDIR /go/src/app
-COPY go.mod go.sum ./
-RUN go mod download
 
 COPY . .
-
+RUN go mod download
 RUN GOARCH=amd64 CGO_ENABLED=0 GOOS=linux go build -o micro-api-gateway
 
 FROM alpine:latest

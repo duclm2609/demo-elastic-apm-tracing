@@ -18,11 +18,11 @@ type Review struct {
 }
 
 type ReviewService struct {
-	logger     nplog.NpLogger
+	logger     nplog.Logger
 	httpClient *http.Client
 }
 
-func NewReviewService(logger nplog.NpLogger) ReviewService {
+func NewReviewService(logger nplog.Logger) ReviewService {
 	return ReviewService{logger: logger, httpClient: apmhttp.WrapClient(http.DefaultClient)}
 }
 

@@ -15,3 +15,6 @@ endif
 
 restart-app: build-java
 	@docker compose up -d --build --force-recreate micro-api-gateway micro-inventory micro-review micro-price
+
+destroy:
+	@docker compose down

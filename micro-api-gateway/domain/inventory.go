@@ -18,11 +18,11 @@ type ProductDetail struct {
 }
 
 type InventoryService struct {
-	logger     nplog.NpLogger
+	logger     nplog.Logger
 	httpClient *http.Client
 }
 
-func NewInventoryService(logger nplog.NpLogger) InventoryService {
+func NewInventoryService(logger nplog.Logger) InventoryService {
 	return InventoryService{logger: logger, httpClient: apmhttp.WrapClient(http.DefaultClient)}
 }
 
