@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/duclm2609/nplog v1.0.0
-	github.com/labstack/echo/v4 v4.7.2
+	github.com/labstack/echo/v4 v4.9.0
 	go.elastic.co/apm/module/apmechov4 v1.15.0
 	go.elastic.co/apm/module/apmhttp v1.15.0
 	golang.org/x/net v0.0.0-20220526153639-5463443f8c37
